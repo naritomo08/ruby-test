@@ -6,9 +6,10 @@ services:
         build:
             context: ./
             dockerfile: ./Dockerfile
+        tty: true
         container_name: ruby
         volumes:
-            - ./ruby:/usr/src/myapp
+            - ./ruby:/app
 
 volumes:
     ruby:
