@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+    ruby:
+        platform: linux/x86_64
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+        container_name: ruby
+        volumes:
+            - ./ruby:/usr/src/myapp
+
+volumes:
+    ruby:
