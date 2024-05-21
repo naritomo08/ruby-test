@@ -4,7 +4,7 @@
 
 ```bash
 git clone https://github.com/naritomo08/ruby-test.git
-cd redmine-test
+cd ruby-test
 docker-compose build
 docker-compose up -d
 ```
