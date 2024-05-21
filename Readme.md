@@ -1,7 +1,5 @@
 # ruby-test
 
-# redmine-test
-
 ## 展開方法
 
 ```bash
