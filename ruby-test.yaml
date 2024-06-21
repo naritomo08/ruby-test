@@ -56,7 +56,7 @@ metadata:
   name: share
   namespace: ruby-test
   annotations:
-    volume.beta.kubernetes.io/storage-class: "slow"
+    storageClassName: "slow"
 spec:
   capacity:
     storage: 5Gi
@@ -73,7 +73,7 @@ metadata:
   name: share
   namespace: ruby-test
   annotations:
-    "volume.beta.kubernetes.io/storage-class": "slow"
+    storageClassName: "slow"
 spec:
   accessModes:
     - ReadWriteOnce
