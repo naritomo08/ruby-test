@@ -11,7 +11,7 @@ docker-compose up -d
 ## Dockerコンテナログイン
 
 ```bash
-docker-compose exec hiki /bin/bash
+docker-compose exec ruby /bin/bash
 ```
 
 ## サイト確認

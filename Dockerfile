@@ -34,7 +34,7 @@ RUN wget http://cache.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7-p374.tar.gz && \
 ENV LANG=ja_JP.UTF-8
 ENV LC_ALL=ja_JP.UTF-8
 
-WORKDIR /app
+WORKDIR /var/www/html
 
 # Apacheを起動するためのCMD
 CMD ["apachectl", "-D", "FOREGROUND"]
