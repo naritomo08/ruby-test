@@ -47,13 +47,13 @@ spec:
       volumes:
       - name: nfs-share-storage
         persistentVolumeClaim:
-          claimName: share
+          claimName: ruby-share
 ---
 #raspi4-1にある特定フォルダのマウント
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: share
+  name: ruby-share
   namespace: ruby-test
 spec:
   capacity:
@@ -63,13 +63,13 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: raspi4-1
-    path: /export/nfs/share
+    path: /export/nfs/ruby-test
   storageClassName: slow
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: share
+  name: ruby-share
   namespace: ruby-test
 spec:
   accessModes:
