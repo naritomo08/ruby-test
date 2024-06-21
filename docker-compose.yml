@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-    hiki:
+    ruby:
         platform: linux/x86_64
         #image: ruby-test-ruby
         build:
@@ -9,7 +9,6 @@ services:
            dockerfile: ./Dockerfile
         
         tty: true
-        container_name: ruby
         volumes:
             - ./ruby:/var/www/html
             - ./apache/log:/var/log/apache2

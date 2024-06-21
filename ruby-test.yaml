@@ -1,0 +1,82 @@
+#LoadBalancer構成
+#VIPでアクセス可能。(kubectl get serviceでのExternal-IP)
+#ローカルリポジトリからイメージ取得
+#マウントしたボリュームの適用
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ruby-test
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ruby-service
+  namespace: ruby-test
+spec:
+  selector:
+    app: ruby-app
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ruby-app
+  namespace: ruby-test
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: ruby-app
+  template:
+    metadata:
+      labels:
+        app: ruby-app
+    spec:
+      containers:
+        - name: ruby-test
+          image: raspi4-2:5000/ruby-test
+          ports:
+            - containerPort: 80
+          volumeMounts:
+          - name: nfs-share-storage
+            mountPath: /var/www/html
+      volumes:
+      - name: nfs-share-storage
+        persistentVolumeClaim:
+          claimName: share
+---
+#raspi4-1にある特定フォルダのマウント
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: share
+  namespace: ruby-test
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "slow"
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: raspi4-1
+    path: /export/nfs/share
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: share
+  namespace: ruby-test
+  annotations:
+    "volume.beta.kubernetes.io/storage-class": "slow"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
