@@ -55,8 +55,6 @@ kind: PersistentVolume
 metadata:
   name: share
   namespace: ruby-test
-  annotations:
-    storageClassName: "slow"
 spec:
   capacity:
     storage: 5Gi
@@ -66,17 +64,17 @@ spec:
   nfs:
     server: raspi4-1
     path: /export/nfs/share
+  storageClassName: slow
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: share
   namespace: ruby-test
-  annotations:
-    storageClassName: "slow"
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi
+  storageClassName: slow
