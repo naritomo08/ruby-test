@@ -1,15 +1,10 @@
-# hiki-site
+# ruby-site
 
 ## 展開方法
 
 ```bash
-mkdir /docker
-cd /docker
-unzip ruby-test.zip
-mv ruby-test hiki-site
-cd hiki-site
-/docker-site内に別途hiki-image.tarを置く。
-docker load < hiki-image.tar
+git clone git@github.com:naritomo08/ruby-test.git
+cd ruby-test
 docker-compose up -d
 ```
 
@@ -18,3 +13,7 @@ docker-compose up -d
 ```bash
 docker-compose exec hiki /bin/bash
 ```
+
+## サイト確認
+
+http://localhost:8080/

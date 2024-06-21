@@ -3,16 +3,16 @@ version: '3.7'
 services:
     hiki:
         platform: linux/x86_64
-        image: hiki-site-hiki
-        #build:
-        #    context: ./
-        #    dockerfile: ./Dockerfile
+        #image: ruby-test-ruby
+        build:
+           context: ./
+           dockerfile: ./Dockerfile
         
         tty: true
-        container_name: hiki
+        container_name: ruby
         volumes:
-            - ./ruby:/app
-            - ./ruby/hiki/DaiwaHouse/tdiary:/var/www/html/tdiary
+            - ./ruby:/var/www/html
+            - ./apache/log:/var/log/apache2
         ports: 
             - "8080:80"
         restart: always

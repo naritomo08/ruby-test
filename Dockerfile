@@ -34,21 +34,6 @@ RUN wget http://cache.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7-p374.tar.gz && \
 ENV LANG=ja_JP.UTF-8
 ENV LC_ALL=ja_JP.UTF-8
 
-# ApacheのCGIモジュールを有効化
-RUN a2enmod cgi
-
-# デフォルトのCGIスクリプトディレクトリを設定
-RUN echo "ScriptAlias /cgi-bin/ /app/hiki/hiki-0.8.7/" > /etc/apache2/conf-available/cgi-bin.conf && \
-    echo "<Directory \"/app/hiki/hiki-0.8.7/\">" >> /etc/apache2/conf-available/cgi-bin.conf && \
-    echo "    AllowOverride None" >> /etc/apache2/conf-available/cgi-bin.conf && \
-    echo "    Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch" >> /etc/apache2/conf-available/cgi-bin.conf && \
-    echo "    Require all granted" >> /etc/apache2/conf-available/cgi-bin.conf && \
-    echo "</Directory>" >> /etc/apache2/conf-available/cgi-bin.conf && \
-    a2enconf cgi-bin
-
-# サイトの設定を確認し、デフォルトの設定を有効にする
-RUN echo "Include /etc/apache2/conf-available/cgi-bin.conf" >> /etc/apache2/apache2.conf
-
 WORKDIR /app
 
 # Apacheを起動するためのCMD
