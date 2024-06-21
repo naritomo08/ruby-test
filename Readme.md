@@ -16,7 +16,9 @@ docker-compose exec ruby /bin/bash
 
 ## サイト確認
 
+```bash
 http://localhost:8080/
+```
 
 ## K8Sへの導入方法
 
@@ -27,6 +29,7 @@ docker tag ruby-test raspi4-2:5000/ruby-test
 docker push raspi4-2:5000/ruby-test
 
 kubectl apply -f ruby-test.yaml
+kubectl get pod -n ruby-test
 kubectl get service -n ruby-test
 →ExternalIPを確認
 
